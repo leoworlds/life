@@ -12,9 +12,9 @@ public class RootPanel extends JComponent {
 
     public RootPanel(int width, int height) {
 
-        Cellar cellar = new Cellar(width/CELL_SIZE, height/CELL_SIZE, K) {
+        Cellar cellar = new Cellar(width/CELL_SIZE, height/CELL_SIZE, K, 30) {
             @Override
-            public void before(boolean[][] cells) {
+            public void iteration(boolean[][] cells) {
                 RootPanel.this.cells = cells;
                 repaint();
             }

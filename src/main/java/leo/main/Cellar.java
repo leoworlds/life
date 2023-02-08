@@ -11,10 +11,12 @@ public class Cellar implements Runnable {
     private int ySize;
 
     private boolean isPause;
+    private long millis;
 
-    public Cellar(int xSize, int ySize, int k) {
+    public Cellar(int xSize, int ySize, int k, long millis) {
         this.xSize = xSize;
         this.ySize = ySize;
+        this.millis = millis;
 
         cells = CellUtils.create(xSize, ySize, k);
     }
@@ -23,26 +25,32 @@ public class Cellar implements Runnable {
     public void run() {
         while (!isPause) {
 
-            before(cells);
+            iteration(cells);
 
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-
-            var newCells = new boolean[xSize][ySize];
-
-            for (int x = 0; x < cells.length; x++) {
-                for (int y = 0; y < cells[x].length; y++) {
-                    int neighbors = NeighborUtils.neighborsNumber(cells, x, y);
-                    newCells[x][y] = (cells[x][y] && neighbors == 2) || neighbors == 3;
+            if (millis > 0) {
+                try {
+                    Thread.sleep(millis);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                 }
             }
 
-            cells = newCells;
+            cells = nextCells();
         }
     }
 
-    public void before(boolean[][] cells) {}
+    private boolean[][] nextCells() {
+        var nextCells = new boolean[xSize][ySize];
+
+        for (int x = 0; x < cells.length; x++) {
+            for (int y = 0; y < cells[x].length; y++) {
+                int neighbors = NeighborUtils.neighborsNumber(cells, x, y);
+                nextCells[x][y] = (cells[x][y] && neighbors == 2) || neighbors == 3;
+            }
+        }
+
+        return nextCells;
+    }
+
+    protected void iteration(boolean[][] cells) {}
 }
