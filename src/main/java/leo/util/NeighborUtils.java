@@ -1,11 +1,10 @@
-package leo.main;
+package leo.util;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
-public class Utils {
+public class NeighborUtils {
 
-    private Utils() {}
+    private NeighborUtils() {}
 
     private static final int [][] NEIGHBORS = new int[][] {
             {-1, -1},{0, -1},{1, -1},
@@ -28,18 +27,5 @@ public class Utils {
         }
 
         return cells[x + neighbor[0]][y + neighbor[1]] ? 1 : 0;
-    }
-
-    public static boolean[][] createCells(int xSize, int ySize, int k) {
-        var cells = new boolean[xSize][ySize];
-        Random random = new Random();
-
-        for (int x = 0; x < cells.length; x++) {
-            for (int y = 0; y < cells[x].length; y++) {
-                cells[x][y] = random.nextInt(100) < k;
-            }
-        }
-
-        return cells;
     }
 }

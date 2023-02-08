@@ -1,5 +1,8 @@
 package leo.main;
 
+import leo.util.CellUtils;
+import leo.util.NeighborUtils;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,7 +19,7 @@ public class RootPanel extends JComponent implements Runnable {
         xSize = width/CELL_SIZE;
         ySize = height/CELL_SIZE;
 
-        cells = Utils.createCells(xSize, ySize, K);
+        cells = CellUtils.create(xSize, ySize, K);
 
         new Thread(this).start();
     }
@@ -51,7 +54,7 @@ public class RootPanel extends JComponent implements Runnable {
 
             for (int x = 0; x < cells.length; x++) {
                 for (int y = 0; y < cells[x].length; y++) {
-                    int neighbors = Utils.neighborsNumber(cells, x, y);
+                    int neighbors = NeighborUtils.neighborsNumber(cells, x, y);
                     newCells[x][y] = (cells[x][y] && neighbors == 2) || neighbors == 3;
                 }
             }
