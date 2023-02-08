@@ -14,7 +14,7 @@ public class CellarPanel extends JComponent {
 
     @Override
     public void paint(Graphics g) {
-        g.setColor(Color.decode("#2b2b2b"));
+        g.setColor(Color.decode("#202020"));
         g.fillRect(0, 0, getWidth(), getHeight());
 
         g.setColor(Color.decode("#ff0000"));

@@ -19,4 +19,17 @@ public class CellUtils {
 
         return cells;
     }
+
+    public static boolean[][] next(boolean[][] cells) {
+        var nextCells = new boolean[cells.length][cells[0].length];
+
+        for (int x = 0; x < cells.length; x++) {
+            for (int y = 0; y < cells[x].length; y++) {
+                int neighbors = NeighborUtils.neighborsNumber(cells, x, y);
+                nextCells[x][y] = (cells[x][y] && neighbors == 2) || neighbors == 3;
+            }
+        }
+
+        return nextCells;
+    }
 }

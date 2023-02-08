@@ -5,6 +5,7 @@ import javax.swing.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Main {
+    private static final String TITLE = "Cellar Life";
 
     private static final int WIDTH= 1200;
     private static final int HEIGHT  = 800;
@@ -12,8 +13,7 @@ public class Main {
     private static final int K = 7;
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Cellar");
-
+        JFrame frame = new JFrame(TITLE);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setSize(WIDTH, HEIGHT);
 
@@ -23,7 +23,7 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        Cellar cellar = new Cellar(WIDTH/CELL_SIZE, HEIGHT/CELL_SIZE, K, 30) {
+        Cellar cellar = new Cellar(WIDTH/CELL_SIZE, HEIGHT/CELL_SIZE, K, 3) {
             @Override
             public void iteration(boolean[][] cells) {
                 cellarPanel.repaint(cells);
