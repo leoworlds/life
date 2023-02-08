@@ -15,6 +15,8 @@ public class RootPanel extends JComponent implements Runnable {
     private int xSize;
     private int ySize;
 
+    private boolean isPause;
+
     public RootPanel(int width, int height) {
         xSize = width/CELL_SIZE;
         ySize = height/CELL_SIZE;
@@ -42,7 +44,7 @@ public class RootPanel extends JComponent implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (!isPause) {
 
             try {
                 Thread.sleep(50);
